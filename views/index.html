@@ -8,6 +8,18 @@
 
 </head>
 <body>
-111111111
+<div id="form">
+    <form action="api/adduser" method="post" enctype="multipart/form-data">
+        <input class="input" type="text" placeholder="ASCH钱包地址" name="name"><br>
+        <input class="input" type="text" placeholder="投票截图" name="name"><br>
+        <input hidden="hidden" class="input" type="text" name="name" value="node1">
+        <img id="preview" />
+        <br />
+        <input class="input" id="coinimage" type="file" name="image" onchange="imgPreview(this)"><br>
+
+
+        <button class="but" type="submit">提  交</button>
+    </form>
+</div>
 </body>
 </html>

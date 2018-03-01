@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var HandleDB = require("../dao/HandleDB");
+var SDB = require("../dao/SDB");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
