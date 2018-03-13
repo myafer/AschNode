@@ -85,11 +85,4 @@ router.post('/', function(req, res) {
 });
 
 
-
-// SDB.adduser({asch_adress: "4444", asch_node_name: "222", create_time: "111", vote_image: "222"}, function (result) {
-//         console.log(result);
-//         res.send(result);
-//     });
-// });
-
 module.exports = router;

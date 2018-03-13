@@ -1,6 +1,6 @@
 
 var fs = require("fs");
-var file = "./db.db";
+var file = "../db.db";
 var exists = fs.existsSync(file);
 
 if(!exists) {
@@ -17,6 +17,7 @@ var db = new sqlite3.Database(file);
 var createUsersTableStr = `
        create table if not exists users(
             UID integer primary key autoincrement,
+            telnum varchar(255) UNIQUE,
             asch_adress varchar(255) UNIQUE,
             asch_node_name varchar(255),
             create_time varchar(255),
@@ -26,8 +27,8 @@ db.run(createUsersTableStr);
 
 module.exports = {
     adduser: function (user, cb) {
-        db.run(`insert into users (asch_adress, asch_node_name, create_time, vote_image) values(?, ?, ?, ?)`,
-            [user.asch_adress, user.asch_node_name, user.create_time, user.vote_image] ,function(err,res){
+        db.run(`insert into users (telnum, asch_adress, asch_node_name, create_time) values(?, ?, ?, ?)`,
+            [user.telnum, user.asch_adress, user.asch_node_name, user.create_time] ,function(err,res){
                 if(!err)
                     return cb({code: 0, message: "add user success!"});
                 else
@@ -46,6 +47,15 @@ module.exports = {
 
     queryUserByAdress: function (adress, cb) {
         db.all(`select * from users where asch_adress=${adress}`, function (err, res) {
+            if(!err)
+                return cb({code: 0, message: "ok!", res: res});
+            else
+                return cb({code: 1, message: err.message});
+        });
+    },
+
+    queryUserByTelNum: function (telnum, cb) {
+        db.all(`select * from users where asch_adress=${telnum}`, function (err, res) {
             if(!err)
                 return cb({code: 0, message: "ok!", res: res});
             else
